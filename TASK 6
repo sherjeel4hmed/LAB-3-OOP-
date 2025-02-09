@@ -1,0 +1,116 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Matrix
+{
+    int rows;
+    int colums;
+    vector<vector<int>> elements;
+    public:
+     Matrix(int r, int c) : rows(r), colums(c), elements(r, vector<int>(c,0)) {}
+
+    int getrows()
+    {
+        return rows;
+    }
+    int getcolums() 
+    {  
+        return colums;
+    }
+   void setelement() {
+    cout << "Enter elements for " << rows << "x" << colums << " matrix:\n";
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < colums; ++j) {
+           cin >> elements[i][j];
+        }
+    }
+}
+void displaymatrix(){
+    for (int i = 0; i < rows; i++)
+    {
+       for (int j = 0; j < colums; j++)
+       {
+           std::cout<<elements[i][j]<<" ";
+       }
+std::cout<<"\n";
+       
+    }
+}
+    Matrix add(const Matrix &mat2){
+        if (rows!=mat2.rows||colums!=mat2.colums)
+        {
+           cout<<"Matrices cannot be added"<<endl;
+            return Matrix(0,0);
+        }
+       Matrix result(rows,colums);
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < colums; j++)
+            {
+                 result.elements[i][j] = elements[i][j] + mat2.elements[i][j];
+            }
+           
+        }
+         return result;
+    }
+        Matrix multiply(const Matrix &mat3){
+            if (colums!=mat3.rows)
+            {
+               cout<<"Matrices cannot be Multipliyed"<<endl;
+            return Matrix(0,0);
+            }
+            
+            Matrix result(rows,mat3.colums);
+
+             for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < mat3.colums; ++j) {
+                result.elements[i][j] = 0;
+                for (int k = 0; k < colums; ++k) {
+                    result.elements[i][j] += elements[i][k] * mat3.elements[k][j];
+                }
+            }
+        }
+        return result;
+            }
+};
+
+int main() {
+    int r1, c1, r2, c2;
+
+    
+    cout << "Enter rows and columns for first matrix: ";
+    cin >> r1 >> c1;
+    Matrix mat1(r1, c1);
+    mat1.setelement();
+
+   
+    cout << "Enter rows and columns for second matrix: ";
+    cin >> r2 >> c2;
+    Matrix mat2(r2, c2);
+    mat2.setelement();
+
+    
+    cout << "\nFirst ";
+    cout<<"\n";
+    mat1.displaymatrix();
+    cout << "\nSecond ";
+      cout<<"\n";
+    mat2.displaymatrix();
+
+    Matrix sum = mat1.add(mat2);
+    if (sum.getrows() > 0 && sum.getcolums() > 0) {
+       cout << "\nSum of matrices:\n";
+        sum.displaymatrix();
+    }
+
+  
+    Matrix product = mat1.multiply(mat2);
+    if (product.getrows() > 0 && product.getcolums() > 0) {
+        cout << "\nProduct of matrices:\n";
+        product.displaymatrix();
+    }
+
+    return 0;
+}
+
