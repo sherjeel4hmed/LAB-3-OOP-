@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+class User
+{
+public:
+    int age;
+    string name;
+};
+
+int main()
+{
+    User obj;
+    obj.name = "Teo";
+    obj.age = 24;
+    cout << "My name is " << obj.name << " and Iam " << obj.age << " years old " << endl;
+}
