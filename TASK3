@@ -1,0 +1,79 @@
+#include <iostream>
+using namespace std;
+
+class Glass
+{
+public:
+    int capacity = 200;
+    int liquidLevel;
+
+    Glass()
+    {
+        liquidLevel = capacity;
+    }
+
+    void drink(int milliliters)
+    {
+        if (milliliters > liquidLevel)
+        {
+            cout << "Not enough Drink in the glass! " << endl;
+            return;
+        }
+
+        liquidLevel -= milliliters;
+        cout << "Remaining liquid: " << liquidLevel << " ml." << endl;
+
+        if (liquidLevel < 100)
+        {
+            cout << "Refilling the glass to 200 ml..." << endl;
+            refill();
+        }
+    }
+
+    void refill()
+    {
+        liquidLevel = capacity;
+        cout << "Glass refilled to " << liquidLevel << " ml." << endl;
+    }
+};
+
+int main()
+{
+    Glass glasses[5];
+    int choice, milliliters, person;
+
+    while (true)
+    {
+        cout << "\n1. Drink from a glass" << endl;
+        cout << "2. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1:
+            cout << "Enter the person's number (1-5): ";
+            cin >> person;
+
+            if (person < 1 || person > 5)
+            {
+                cout << "Invalid person number! Choose between 1 and 5." << endl;
+                break;
+            }
+
+            cout << "Enter the amount to drink (ml): ";
+            cin >> milliliters;
+            glasses[person - 1].drink(milliliters);
+            break;
+
+        case 2:
+            cout << "Thank you. Exiting program." << endl;
+            return 0;
+
+        default:
+            cout << "Invalid choice! Please enter 1 or 2." << endl;
+        }
+    }
+
+    return 0;
+}
