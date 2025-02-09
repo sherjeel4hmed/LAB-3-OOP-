@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+class Date
+{
+    int month;
+    int day;
+    int year;
+
+public:
+    void setdate(int day1, int month1, int year1)
+    {
+        day = day1;
+        month = month1;
+        year = year1;
+    }
+    void displaydate()
+    {
+        cout << day << "/" << month << "/" << year << endl;
+    }
+};
+
+int main()
+{
+    Date datetest;
+    datetest.setdate(12, 10, 2023);
+    datetest.displaydate();
+    return 0;
+}
